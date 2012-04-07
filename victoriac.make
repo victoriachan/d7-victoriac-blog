@@ -7,7 +7,6 @@ projects[auto_nodetitle][version] = 1.0
 projects[date][version] = 2.3
 projects[devel][version] = 1.2
 projects[ds][version] = 1.5
-projects[ds][patch][] = http://drupal.org/files/ds_empty_region_to_block_2.patchprojects[field_collection] = 1.0-beta4
 projects[field_group][version] = 1.1
 projects[fontyourface][version] = 2.2
 projects[google_analytics][version] = 1.2
