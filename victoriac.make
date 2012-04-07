@@ -36,12 +36,12 @@ projects[wysiwyg][version] = 2.1
 projects[xmlsitemap][version] = 2.0-rc1
 
 ; Libraries
-libraries[tinymce][download][type] = "get"; One of get, cvs, git, bzr or svn
-libraries[tinymce][download][url] = "http://tinymce.moxiecode.com/track.php?url=http%3A%2F%2Fgithub.com%2Fdownloads%2Ftinymce%2Ftinymce%2Ftinymce_3_3_9_3.zip"; The url of the download
-libraries[tinymce][directory_name] = "tinymce"
-libraries[tinymce][type] = "library"
+;libraries[tinymce][download][type] = "get"; One of get, cvs, git, bzr or svn
+;libraries[tinymce][download][url] = "http://tinymce.moxiecode.com/track.php?url=http%3A%2F%2Fgithub.com%2Fdownloads%2Ftinymce%2Ftinymce%2Ftinymce_3_3_9_3.zip"; The url of the download
+;libraries[tinymce][directory_name] = "tinymce"
+;libraries[tinymce][type] = "library"
 
-libraries[lessphp][download][type] = "get"; One of get, cvs, git, bzr or svn
-libraries[lessphp][download][url] = "http://leafo.net/lessphp/src/lessphp-0.3.3.tar.gz"; The url of the download
-libraries[lessphp][directory_name] = "lessphp"
-libraries[lessphp][type] = "library"
+;libraries[lessphp][download][type] = "get"; One of get, cvs, git, bzr or svn
+;libraries[lessphp][download][url] = "http://leafo.net/lessphp/src/lessphp-0.3.3.tar.gz"; The url of the download
+;libraries[lessphp][directory_name] = "lessphp"
+;libraries[lessphp][type] = "library"
