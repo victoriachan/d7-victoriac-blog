@@ -1,0 +1,7 @@
+; $Id$
+; Info file for vc_custom_formatters module
+name = VC custom field formatters
+description = Miscellaneous field formats for theming
+package = Other
+core = 7.x
+version = "7.x-1.0"

@@ -1,0 +1,356 @@
+<?php
+/**
+ * @file vc_custom_formatters.module
+ * Random formatters for theming
+ */
+
+/**
+ * Implements hook_field_group_formatter_info()
+ *
+ * @see field_group_field_group_formatter_info()
+ */
+function vc_custom_formatters_field_group_formatter_info() {
+  return array(
+    'display' => array( // 'form' or 'display' - whether this applies to node form or ds
+      'vc_custom_formatters_link_block' => array(
+        'label' => t('Link block'),
+        'description' => t('Display the inner content inside a wrapper link tag using link from a specified field.'),
+        'instance_settings' => array('link_field_name' => NULL, 'link_css_class' => '', 'background_image_field_name' => '', 'background_image_style' => 'original'),
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function vc_custom_formatters_field_formatter_info() {
+  return array(
+    // the key must be unique   
+    'vc_custom_formatters_link_to_field' => array(
+      'label' => t('Link using another field'),
+      'field types' => array('text'), // the types that this formatter applies to
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+      'settings' => array('link_field_name' => NULL),
+    ),
+    'vc_custom_formatters_image_link_to_field' => array(
+      'label' => t('Link using another field'),
+      'field types' => array('image'),
+      'settings' => array('image_style' => '', 'image_link_field_name' => ''),
+    ),
+    'vc_custom_formatters_html_heading' => array(
+      'label' => t('HTML heading'),
+      'field types' => array('text'),
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+      'settings' => array('html_heading_type' => 'h2', 'add_id_to_tag' => 0, 'css_class_name' => ''),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function vc_custom_formatters_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $element = array();
+  
+  switch ($display['type']) {
+    case 'vc_custom_formatters_link_to_field':
+      $element['link_field_name'] = array(
+        '#title' => t('Field name of link field'),
+        '#type' => 'textfield',
+        '#size' => 255,
+        '#default_value' => $settings['link_field_name'],
+        '#required' => TRUE,
+      );
+      break;
+    case 'vc_custom_formatters_image_link_to_field':
+      $image_styles = image_style_options(FALSE);
+      $element['image_style'] = array(
+        '#title' => t('Image style'),
+        '#type' => 'select',
+        '#default_value' => $settings['image_style'],
+        '#empty_option' => t('None (original image)'),
+        '#options' => $image_styles,
+      );
+      $element['image_link_field_name'] = array(
+        '#title' => t('Field name of link field'),
+        '#type' => 'textfield',
+        '#size' => 255,
+        '#default_value' => $settings['image_link_field_name'],
+        '#required' => TRUE,
+      );
+      break;
+    case 'vc_custom_formatters_html_heading':
+      $element['html_heading_type'] = array(
+        '#title' => t('Heading type'),
+        '#type' => 'select',
+        '#options' => array('h2' => 'H2','h3' => 'H3', 'p' => 'p'),
+        '#default_value' => $settings['html_heading_type'],
+        '#required' => TRUE,
+      );
+      $element['add_id_to_tag'] = array(
+        '#title' => t('Add ID attribute to tag'),
+        '#type' => 'checkbox',
+        '#default_value' => $settings['add_id_to_tag'],
+        '#options' => array(1,0),
+        '#required' => FALSE,
+      );
+      $element['css_class_name'] = array(
+        '#title' => t('CSS class name'),
+        '#type' => 'textfield',
+        '#size' => 255,
+        '#default_value' => $settings['css_class_name'],
+        '#required' => FALSE,
+      );
+      break;
+  }
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function vc_custom_formatters_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $summary = '';
+  
+  switch ($display['type']) {
+    case 'vc_custom_formatters_link_to_field':
+      $summary = t('Link field name') . ': ' . $settings['link_field_name'];
+      break;
+    case 'vc_custom_formatters_image_link_to_field':
+      $image_styles = image_style_options(FALSE);
+      unset($image_styles['']);
+      if (isset($image_styles[$settings['image_style']])) {
+        $summary[] = t('Image style: @style', array('@style' => $image_styles[$settings['image_style']]));
+      }
+      else {
+        $summary[] = t('Original image');
+      }
+      $summary[] = t('Link field name') . ': ' . $settings['image_link_field_name'];
+      $summary = implode('<br />', $summary);
+      break;
+    case 'vc_custom_formatters_html_heading':
+      $summary = t('Heading type') . ': ' . $settings['html_heading_type'];
+      $summary .= $settings['add_id_to_tag'] ? ' | Add ID' : ' | No ID';
+      $summary .= $settings['css_class_name'] ? ' | CSS class: ' . $settings['css_class_name'] : '';
+      break;
+  }
+  
+  return $summary;
+}
+
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function vc_custom_formatters_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  switch ($display['type']) {
+    case 'vc_custom_formatters_link_to_field':
+      if (!isset($display['settings']['link_field_name'])) {
+        break;
+      }
+      foreach ($items as $delta => $item) {
+        // Get link from the specified field
+        if (isset($entity->{$display['settings']['link_field_name']}[LANGUAGE_NONE][$delta]['url']) && ($link = $entity->{$display['settings']['link_field_name']}[LANGUAGE_NONE][$delta]['url'])) {
+          $output = l($item['safe_value'], $link);
+        }
+        // Get nid if link field is node reference field
+        else if (isset($entity->{$display['settings']['link_field_name']}[LANGUAGE_NONE][$delta]['nid']) && $nid = $entity->{$display['settings']['link_field_name']}[LANGUAGE_NONE][$delta]['nid']) {
+          $output = l($item['safe_value'], 'node/' . $nid);
+        }
+        // Otherwise just return plain text
+        else {
+          $output = $item['safe_value'];
+        }
+        $element[$delta] = array('#markup' => $output);
+      }
+      break;
+    case 'vc_custom_formatters_image_link_to_field':
+      foreach ($items as $delta => $item) {
+        if (!isset($display['settings']['image_link_field_name'])) {
+          break;
+        }
+        // Get link from the specified field
+        if (isset($entity->{$display['settings']['image_link_field_name']}[LANGUAGE_NONE][$delta]['url']) && ($link = $entity->{$display['settings']['image_link_field_name']}[LANGUAGE_NONE][$delta]['url'])) {
+          $image_link = $link;
+        }
+        // Get nid if link field is node reference field
+        else if (isset($entity->{$display['settings']['image_link_field_name']}[LANGUAGE_NONE][$delta]['nid']) && $nid = $entity->{$display['settings']['image_link_field_name']}[LANGUAGE_NONE][$delta]['nid']) {
+          $image_link = 'node/' . $nid;
+        }
+        if (isset($image_link)) {
+          $uri = array(
+            'path' => $image_link,
+            'options' => array(),
+          );
+        }
+        $element[$delta] = array(
+          '#theme' => 'image_formatter',
+          '#item' => $item,
+          '#image_style' => $display['settings']['image_style'],
+          '#path' => isset($uri) ? $uri : '',
+        );
+      }
+      break;
+    case 'vc_custom_formatters_html_heading':
+      if (!isset($display['settings']['html_heading_type'])) {
+        break;
+      }
+      foreach ($items as $delta => $item) {
+        $tag = $display['settings']['html_heading_type'];
+        $tag_id = $display['settings']['add_id_to_tag'] ? ' id = "' . drupal_html_id($item['value']) . '" ' : '';
+        $tag_class = $display['settings']['css_class_name'] ? ' class = "' . $display['settings']['css_class_name'] . '" ' : '';
+        $output = '<' . $tag . $tag_id . $tag_class . '>' . $item['safe_value'] . '</' . $tag . '>';
+        $element[$delta] = array('#markup' => $output);
+      }
+      break;
+  }
+  
+  return $element;
+}
+
+/**
+ * Implements hook_field_group_format_settings().
+ *
+ * Defines configuration widget for the settings on a field group
+ * formatter. Eache formatter can have different elements and storage.
+ *
+ * @params Object $group The group object.
+ * @return Array $form The form element for the format settings.
+ */
+function vc_custom_formatters_field_group_format_settings($group) {
+  $form = array(
+    'instance_settings' => array(
+      '#tree' => TRUE,
+      '#weight' => 2,
+    ),
+  );
+  switch ($group->format_type) {
+    case 'vc_custom_formatters_link_block':
+      $form['instance_settings']['link_field_name'] = array(
+        '#title' => t('Field name of link field'),
+        '#type' => 'textfield',
+        '#size' => 255,
+        '#default_value' => isset($group->format_settings['instance_settings']['link_field_name']) ? $group->format_settings['instance_settings']['link_field_name'] : '',
+        '#required' => TRUE,
+      );
+       $form['instance_settings']['link_css_class'] = array(
+        '#title' => t('CSS class of link field'),
+        '#type' => 'textfield',
+        '#size' => 255,
+        '#default_value' => isset($group->format_settings['instance_settings']['link_css_class']) ? $group->format_settings['instance_settings']['link_css_class'] : '',
+        '#required' => FALSE,
+      );
+      $form['instance_settings']['background_image_field_name'] = array(
+        '#title' => t('Field name of background image field'),
+        '#type' => 'textfield',
+        '#size' => 255,
+        '#default_value' => isset($group->format_settings['instance_settings']['background_image_field_name']) ? $group->format_settings['instance_settings']['background_image_field_name'] : '',
+        '#required' => FALSE,
+      );
+      
+      $image_styles = array('original'=>'original') + image_styles();
+      $image_styles_options = array_combine(array_keys($image_styles), array_keys($image_styles));
+      $form['instance_settings']['background_image_style'] = array(
+        '#title' => t('Image style of background image field'),
+        '#type' => 'select',
+        '#options' => $image_styles_options,
+        '#default_value' => isset($group->format_settings['instance_settings']['background_image_style']) ? $group->format_settings['instance_settings']['background_image_style'] : '',
+        '#required' => FALSE,
+      );
+      break;
+  }
+
+  return $form;
+}
+
+/**
+ * Implements hook_field_group_pre_render().
+ *
+ * This function gives you the oppertunity to create the given
+ * wrapper element that can contain the fields.
+ * In the example beneath, some variables are prepared and used when building the
+ * actual wrapper element. All elements in drupal fapi can be used.
+ *
+ * Note that at this point, the field group has no notion of the fields in it.
+ *
+ * There is also an alternative way of handling this. The default implementation
+ * within field_group calls "field_group_pre_render_<format_type>".
+ * @see field_group_pre_render_fieldset.
+ *
+ * @param Array $elements by address.
+ * @param Object $group The Field group info.
+ */
+function vc_custom_formatters_field_group_pre_render(& $element, $group, & $form) {
+
+  // You can prepare some variables to use in the logic.
+  $view_mode = isset($form['#view_mode']) ? $form['#view_mode'] : 'form';
+  $id = $form['#entity_type'] . '_' . $form['#bundle'] . '_' . $view_mode . '_' . $group->group_name;
+
+  // Each formatter type can have whole different set of element properties.
+  switch ($group->format_type) {
+
+    // Normal or collapsible div.
+    case 'vc_custom_formatters_link_block':
+    
+      if (!isset($group->format_settings['instance_settings']['link_field_name'])) { return; }
+      $link_field_name = $group->format_settings['instance_settings']['link_field_name'];
+      $entity = $element[$group->children[0]]['#object'];
+      
+      // Get link from the specified field
+      if (isset($entity->{$link_field_name}[LANGUAGE_NONE][0]['url'])) {
+        $link = $entity->{$link_field_name}[LANGUAGE_NONE][0]['url'];
+      }
+      // Get nid if link field is node reference field
+      else if (isset($entity->{$link_field_name}[LANGUAGE_NONE][0]['nid'])) {
+        $link = 'node/' . $entity->{$link_field_name}[LANGUAGE_NONE][0]['nid'];
+      }
+      
+      if (!isset($link)) { return; }
+      
+      // Get link classes
+      $link_css_class = isset($group->format_settings['instance_settings']['link_css_class'])? trim($group->format_settings['instance_settings']['link_css_class']) : '';
+      
+      // Get background image
+      $background_image = '';
+      if (($background_image_field_name = $group->format_settings['instance_settings']['background_image_field_name']) && ($background_image_style = $group->format_settings['instance_settings']['background_image_style'])) {
+        if (isset($entity->{$background_image_field_name}[LANGUAGE_NONE][0]['uri'])) {
+          if ($background_image_style != 'original') {
+            $background_image_path = file_create_url(image_style_path($background_image_style, $entity->{$background_image_field_name}[LANGUAGE_NONE][0]['uri']));
+          }
+          else {
+            $background_image_path = file_create_url($entity->{$background_image_field_name}[LANGUAGE_NONE][0]['uri']);
+          }
+          $background_image = 'style="background-image:url(' . $background_image_path . ')" ';
+        }
+      }
+      
+      // Append link wrapper element
+      $add = array(
+        '#type' => 'markup',
+        '#weight' => $group->weight,
+        '#id' => $id,
+      );
+      $classes = array(
+          'field-group-' . $group->group_name,
+          'link-block',
+          $link_css_class,
+          // add class to denote whether this has bg image
+          strlen($background_image) ? 'link-block-has-image' : 'link-block-no-image',
+          // add class to denote the image style for this (if using bg image)
+          strlen($background_image) && isset($background_image_style) ? 'link-block-image-' . $background_image_style : NULL,
+        );
+      $add['#prefix'] = '<a class="' . implode($classes, ' ') . '" href="' . $link . '" ' . $background_image . '>';
+      $add['#suffix'] = '</a>';
+      $element += $add;
+      
+      break;
+  }
+}
