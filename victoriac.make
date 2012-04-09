@@ -4,6 +4,8 @@ core = 7.x
 projects[drupal][version] = 7.12
 
 projects[auto_nodetitle][version] = 1.0
+projects[better_formats][version] = 1.x-dev
+projects[context][version] = 3.0-beta2
 projects[ctools][version] = 1.0
 projects[date][version] = 2.3
 projects[devel][version] = 1.2
