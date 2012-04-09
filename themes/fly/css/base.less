@@ -8,8 +8,33 @@ html {
   height: 100%; /* So background will be full height on shorter pages */
 }
 body {
-  font-size: @fontsize; 
+  font-size: @fontsize;
+  line-height: 1.3em;
+  letter-spacing: 0.03em;
   font-family: @fontfamily;
-  line-height: 1.5em;
   background: url(../images/tile.png) repeat 0 0;
+}
+.site-container {
+  overflow: hidden;
+}
+.page-level-header,
+.page-level-footer,
+.page-level-main {
+  .clearfix();
+  width: @width-full;
+  margin: 0 auto;
+}
+.page-level-main {
+  .page-main {
+    .clearfix();
+    width: @width-main - @grid-padding - @grid-padding;
+    margin: 0 @grid-padding;
+    float: left;
+  }
+  .page-sidebar {
+    .clearfix();
+    width: @width-sidebar - @grid-padding - @grid-padding;
+    margin: 0 @grid-padding;
+    float: left;
+  }
 }

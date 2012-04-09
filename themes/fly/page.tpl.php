@@ -6,8 +6,8 @@
 ?>
 <!--page.tpl.php-->
 <?php print $mothership_poorthemers_helper; ?>
-
-<header class="cf" role="banner">
+<div class="site-container">
+<header class="page-level-header" role="banner">
 
   <?php if ($logo): ?>
     <figure class="logo">
@@ -29,23 +29,21 @@
   <?php endif; ?>
 	
   <?php if ($page['header']): ?>
-    <div class="header">
+    <div class="header region-header">
       <?php print render($page['header']); ?>
     </div>
   <?php endif; ?>
 
-
-
 </header>
 
-<div class="page cf">
-  <?php if ($page['sidebar_first']): ?>
-    <div class="sidebar-one">
+<div class="page-level-main">
+  <?php if (isset($page['sidebar_first']) && $page['sidebar_first']): ?>
+    <div class="page-sidebar sidebar sidebar-one">
     <?php print render($page['sidebar_first']); ?>
     </div>
   <?php endif; ?>
 
-  <div role="main">
+  <div class="page-main" role="main">
     <?php print render($title_prefix); ?>
     <?php if ($title): ?>
       <h1><?php print $title; ?></h1>
@@ -79,15 +77,15 @@
   </div><!--/main-->
 
   <?php if ($page['sidebar_second']): ?>
-    <div class="sidebar-two">
+    <div class="page-sidebar sidebar sidebar-two">
       <?php print render($page['sidebar_second']); ?>
     </div>
   <?php endif; ?>
 </div><!--/page-->
 
-<footer role="contentinfo">
+<footer class="page-level-footer" role="contentinfo">
   <?php print render($page['footer']); ?>
 </footer>
-
+</div><!--/container -->
 
 
