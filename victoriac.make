@@ -15,6 +15,7 @@ projects[features][version] = 1.0-rc1
 projects[field_collection][version] = 1.0-beta4
 projects[field_group][version] = 1.1
 projects[file_entity][version] = 2.0-unstable3
+projects[filter_perms][version] = 1.x-dev
 projects[fontyourface][version] = 2.2
 projects[google_analytics][version] = 1.2
 projects[less][version] = 2.4
