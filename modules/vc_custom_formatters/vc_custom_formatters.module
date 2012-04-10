@@ -347,8 +347,8 @@ function vc_custom_formatters_field_group_pre_render(& $element, $group, & $form
           // add class to denote the image style for this (if using bg image)
           strlen($background_image) && isset($background_image_style) ? 'link-block-image-' . $background_image_style : NULL,
         );
-      $add['#prefix'] = '<a class="' . implode($classes, ' ') . '" href="' . $link . '" ' . $background_image . '>';
-      $add['#suffix'] = '</a>';
+      $add['#prefix'] = '<a class="' . implode($classes, ' ') . '" href="' . url($link) . '" ><div class="wrapper" ' . $background_image . '>';
+      $add['#suffix'] = '</div></a>';
       $element += $add;
       
       break;
