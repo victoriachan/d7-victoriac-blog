@@ -7,9 +7,9 @@ php = 5.2
 base theme = mothership
 
 ;-------------- F E A T U R E S -------------
-features[] = logo
+;features[] = logo
 features[] = favicon
-;features[] = name
+features[] = name
 ;features[] = slogan
 ;features[] = node_user_picture
 ;features[] = comment_user_picture
@@ -37,6 +37,7 @@ regions[highlighted] = Highlighted
 
 ;-------------- C S S -------------
 stylesheets[all][] = css/base.less
+stylesheets[all][] = css/layout.less
 stylesheets[all][] = css/livery.less
 
 ;-------------- JS -------------

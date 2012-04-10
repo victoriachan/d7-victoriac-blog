@@ -1,0 +1,45 @@
+/* 
+ * Layout and structure styles
+ */
+ 
+@import "mixins.less";
+
+html {
+  height: 100%; /* So background will be full height on shorter pages */
+}
+body {
+  background: url(../images/tile.png) repeat 0 0;
+}
+.site-container {
+  overflow: hidden;
+}
+
+/* page level */
+.page-level-header {
+  .clearfix();
+  width: 100%;
+  background-color: #000;
+}
+.page-level-header .wrapper,
+.page-level-footer,
+.page-level-main {
+  .clearfix();
+  width: @width-full;
+  margin: 0 auto;
+}
+
+/* page main */
+.page-level-main {
+  .page-main {
+    .clearfix();
+    width: @width-main - @grid-padding - @grid-padding;
+    margin: 0 @grid-padding;
+    float: left;
+  }
+  .page-sidebar {
+    .clearfix();
+    width: @width-sidebar - @grid-padding - @grid-padding;
+    margin: 0 @grid-padding;
+    float: left;
+  }
+}

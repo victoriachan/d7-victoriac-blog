@@ -8,7 +8,7 @@
 <?php print $mothership_poorthemers_helper; ?>
 <div class="site-container">
 <header class="page-level-header" role="banner">
-
+  <div class="wrapper">
   <?php if ($logo): ?>
     <figure class="logo">
     <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
@@ -17,23 +17,21 @@
     </figure>
   <?php endif; ?>
 
-	<?php if($site_name OR $site_slogan ): ?>
-  <hgroup>
-		<?php if($site_name): ?>
-    <h1><?php print $site_name; ?></h1>
-    <?php endif; ?>
-    <?php if ($site_slogan): ?>
-      <h2><?php print $site_slogan; ?></h2>
-    <?php endif; ?>
-  </hgroup>
+  <?php if($site_name OR $site_slogan ): ?>
+  <?php if($site_name): ?>
+    <?php print $site_name; ?>
   <?php endif; ?>
-	
+  <?php if ($site_slogan): ?>
+    <h2><?php print $site_slogan; ?></h2>
+  <?php endif; ?>
+  <?php endif; ?>
+  
   <?php if ($page['header']): ?>
     <div class="header region-header">
       <?php print render($page['header']); ?>
     </div>
   <?php endif; ?>
-
+  </div>
 </header>
 
 <div class="page-level-main">
