@@ -5,10 +5,10 @@
 @import "mixins.less";
 
 body {
-  font-size: @fontsize;
+  font-size: @fontsize-main;
   line-height: 1.3em;
   letter-spacing: 0.03em;
-  font-family: @fontfamily;
+  font-family: @fontfamily-main;
 }
 
 /* Links */
@@ -19,8 +19,7 @@ a {
 
 /* headings */
 h1, h2, h3 {
-  font-family: @fontfamily-heading;
-  font-weight:bold;
+  .heading-large();
   padding: 0;
 }
 h1 {

@@ -28,3 +28,60 @@
     }
   }
 }
+
+/* Sidebar search */
+.page-sidebar .block-search {
+  padding: 35px 0 0 15px;
+  margin: 0 0 @grid-padding 0;
+  .clearfix();
+  
+  h2 {
+    font-size: 1.1em;
+    color: #fff;
+    text-shadow: 1px 1px 5px #444;
+    margin: 0 0 5px 0;
+  }
+  .form-actions,
+  .form-item {
+    margin: 0;
+    padding: 0;
+    display: inline;
+  }
+}
+
+/* Sidebar section menu (only on front page and section indexes) */
+
+.page-sidebar .block-menu .menu {
+  background: url(../images/nav_bg.png) no-repeat 0 0;
+  height: 290px;
+  padding: 10px 0 0 15px;
+  font-size: 1.7em;
+  letter-spacing: 1.5px;
+  
+  li {
+    margin: 0;
+    padding: 0;
+    a {
+      display: block;
+      overflow: hidden;
+      background: url(../images/nav_item.png) no-repeat 0 0;
+      height: 45px;
+      padding: 25px 0 0 30px;
+      margin: 0;
+      color: #FFFFFF;
+      text-shadow: 1px 1px 5px #666666;
+      text-decoration: none;
+      
+      &.active,
+      &:hover {
+        color: #000;
+        font-weight: bold;
+        text-shadow: 1px 1px 5px #444;
+        background: url(../images/nav_item_selected.png) no-repeat 0 0;
+      }
+    }
+  }
+  li.first {
+    display: none;
+  }
+}
