@@ -49,7 +49,9 @@
 
   <div class="page-main" role="main">
     <?php print render($title_prefix); ?>
-    <?php if ($title): ?>
+    <?php if (isset($rich_title)): ?>
+      <h1 class="rich-title"><?php print $rich_title; ?></h1>
+    <?php elseif ($title): ?>
       <h1><?php print $title; ?></h1>
     <?php endif; ?>
     <?php print render($title_suffix); ?>

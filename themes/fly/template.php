@@ -19,6 +19,12 @@ function fly_preprocess_page(&$variables, $hook) {
   
   // Adds home button to top
   $variables['home'] = l('Back to home', $base_url, array('attributes' => array('id' => 'top', 'class' => 'home-button')));
+  
+  // Set field_rich_title as title if it is defined (so that rich text titles with em tags can be set)
+  $lang = isset($variables['node']->language) ? $variables['node']->language : LANGUAGE_NONE;
+  if (isset($variables['node']->field_rich_title[$lang][0]['value'])) {
+    $variables['rich_title'] = $variables['node']->field_rich_title[$lang][0]['value'];
+  }
 }
 
 /**
