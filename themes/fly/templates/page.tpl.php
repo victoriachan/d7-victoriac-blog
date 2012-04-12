@@ -26,8 +26,10 @@
   <?php endif; ?>
   <?php endif; ?>
   
+  <?php print $home; ?>
+  
   <?php if(!$is_front): ?>
-    <div id="breadcrumb" class="breadcrumb"><?php print $breadcrumb; ?></div>
+    <?php print $breadcrumb; ?>
   <?php endif; ?>
   
   <?php if ($page['header']): ?>

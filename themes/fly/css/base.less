@@ -16,7 +16,20 @@ body {
 a {
   color: @color-pri;
 }
-
+/* 
+.node {
+  a {
+    color: darken(@color-yellow, 50%);
+    background-color: fadeout(desaturate(@color-yellow, 20%), 40%);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: none;
+    color: @color-text-main;
+    background-color: fadeout(desaturate(@color-pri, 50%), 70%);
+  }
+} 
+*/
 
 /* headings */
 h1, h2, h3 {
@@ -27,7 +40,7 @@ h1 {
   font-style:italic;
   font-size: 3.7em;
   line-height: 0.8em;
-  color:#000;
+  color: @color-text-headings;
   margin: 0;
   span {
     font-size:0.7em;
