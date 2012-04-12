@@ -26,6 +26,10 @@
   <?php endif; ?>
   <?php endif; ?>
   
+  <?php if(!$is_front): ?>
+    <div id="breadcrumb" class="breadcrumb"><?php print $breadcrumb; ?></div>
+  <?php endif; ?>
+  
   <?php if ($page['header']): ?>
     <div class="header region-header">
       <?php print render($page['header']); ?>
@@ -47,8 +51,6 @@
       <h1><?php print $title; ?></h1>
     <?php endif; ?>
     <?php print render($title_suffix); ?>
-
-    <?php print $breadcrumb; ?>
 
     <?php if ($action_links): ?>
       <ul class="action-links"><?php print render($action_links); ?></ul>
