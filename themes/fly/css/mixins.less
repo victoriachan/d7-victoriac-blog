@@ -64,13 +64,13 @@
 }
 
 /* use image background as link */
-.image-background-link(@width, @height, @imageurl) {
+.image-background-link(@width, @height, @imageurl, @pos_left: 0, @pos_top: 0) {
   display: block;
   overflow: hidden;
   text-indent: -9999px;
   width: @width;
   height: @height;
-  background: url(@{imageurl}) no-repeat 0 0;
+  background: url(@{imageurl}) no-repeat @pos_left @pos_top;
   margin: 0;
   padding: 0;
 }
