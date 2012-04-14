@@ -5,11 +5,14 @@
 @import "mixins.less";
 
 body {
-  font-size: @fontsize-main;
-  line-height: 1.3em;
-  letter-spacing: 0.03em;
   font-family: @fontfamily-main;
+  font-size: @fontsize-main;
+  line-height: 1.4em;
   color: @color-text-main;
+}
+
+p {
+  margin-bottom: 1em;
 }
 
 /* Links */
@@ -42,6 +45,9 @@ h1 {
   line-height: 0.9em;
   color: @color-text-headings;
   margin: 0;
+}
+.page-main h1 {
+  margin-bottom: @grid-padding * 2;
 }
 h1.rich-title {
   font-weight: normal;
