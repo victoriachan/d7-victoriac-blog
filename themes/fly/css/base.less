@@ -18,21 +18,11 @@ p {
 /* Links */
 a {
   color: @color-pri;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
 }
-/* 
-.node {
-  a {
-    color: darken(@color-yellow, 50%);
-    background-color: fadeout(desaturate(@color-yellow, 20%), 40%);
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: none;
-    color: @color-text-main;
-    background-color: fadeout(desaturate(@color-pri, 50%), 70%);
-  }
-} 
-*/
 
 /* headings */
 h1, h2, h3 {

@@ -23,7 +23,7 @@
 @color-pri: #e9413f;
 @color-yellow: #FAD337;
 @color-light: #F1F1F1;
-@color-blackbg-grey: #888888;
+@color-blackbg-gray: #777777;
 
 /* ********************* */
 /* Fonts                  */
@@ -42,6 +42,22 @@
   letter-spacing: 0.03em;
   line-height: 0.8em;
   text-shadow: 1px 0 3px rgba(0,0,0,0.2);
+}
+
+.blackbg-fonts() {
+  color: @color-blackbg-gray;
+  font-size: 0.8em;
+  line-height: normal;
+  letter-spacing: 0.05em;
+  a {
+    color: @color-light;
+    text-decoration: none;
+    background-color: transparent;
+    &:hover {
+      color: @color-blackbg-gray;
+      background-color: transparent;
+    }
+  }  
 }
 
 /* ********************* */

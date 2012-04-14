@@ -8,24 +8,39 @@ html {
   height: 100%; /* So background will be full height on shorter pages */
 }
 body {
-  background: url(../images/tile.png) repeat 0 0;
+  background-color: #000;
+  height: 100%;
+  min-width: @width-full;
+  margin: 0;
+  padding: 0;
 }
 .site-container {
-  overflow: hidden;
+  .clearfix();
+  width: 100%;
+  background: url(../images/tile.png) repeat 0 0;
 }
 
 /* page level */
-.page-level-header {
-  .clearfix();
-  width: 100%;
-  background-color: #000;
-}
-.page-level-header .wrapper,
+.page-level-header,
 .page-level-footer,
 .page-level-main {
   .clearfix();
+  width: 100%;
+}
+.page-level-header .page-level-wrapper,
+.page-level-footer .page-level-wrapper,
+.page-level-main .page-level-wrapper{
+  .clearfix();
   width: @width-full;
   margin: 0 auto;
+}
+
+.page-level-header {
+  background-color: #000;
+}
+.page-level-footer {
+  padding: 100px 0 10px 0;
+  background: url(../images/footer_bg.png) 0 0 repeat-x;
 }
 
 /* page main */

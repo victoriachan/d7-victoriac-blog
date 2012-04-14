@@ -8,7 +8,7 @@
 <?php print $mothership_poorthemers_helper; ?>
 <div class="site-container">
 <header class="page-level-header" role="banner">
-  <div class="wrapper">
+  <div class="page-level-wrapper">
   <?php if ($logo): ?>
     <figure class="logo">
     <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
@@ -41,6 +41,7 @@
 </header>
 
 <div class="page-level-main">
+  <div class="page-level-wrapper">
   <?php if (isset($page['sidebar_first']) && $page['sidebar_first']): ?>
     <div class="page-sidebar sidebar sidebar-one">
     <?php print render($page['sidebar_first']); ?>
@@ -85,11 +86,12 @@
       <?php print render($page['sidebar_second']); ?>
     </div>
   <?php endif; ?>
+  </div><!-- /page-level-wrapper -->
 </div><!--/page-->
 
 <footer class="page-level-footer" role="contentinfo">
+  <div class="page-level-wrapper">
   <?php print render($page['footer']); ?>
+  </div>
 </footer>
 </div><!--/container -->
-
-
