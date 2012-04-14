@@ -42,8 +42,6 @@ projects[robotstxt][version] = 1.0
 projects[token][version] = 1.0
 projects[views][version] = 3.3
 projects[viewfield][version] = 2.x-dev
-projects[webform][version] = 3.17
-projects[webform_validation][version] = 1.1
 projects[wysiwyg][version] = 2.1
 projects[xmlsitemap][version] = 2.0-rc1
 
