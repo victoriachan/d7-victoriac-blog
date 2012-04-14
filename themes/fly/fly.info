@@ -38,6 +38,7 @@ regions[highlighted] = Highlighted
 ;-------------- C S S -------------
 stylesheets[all][] = css/base.less
 stylesheets[all][] = css/layout.less
+stylesheets[all][] = css/form.less
 stylesheets[all][] = css/livery.less
 
 ;-------------- JS -------------

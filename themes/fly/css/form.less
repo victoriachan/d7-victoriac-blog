@@ -1,0 +1,59 @@
+/* Forms */
+@import "mixins.less";
+
+form {
+  small {
+    font-style: italic;
+    font-size: 0.9em;
+  }
+  .marker, .form-required {
+    color: @color-text-main;
+  }
+}
+
+.form-item {
+  label {
+    font-weight: bold;
+    color: @color-text-main;
+  }
+  textarea,
+  input {
+    line-height: 1.3em;
+  }
+}
+
+.form-actions {
+  margin: 4px 0 0;
+  padding: 0;
+  clear: both;
+}
+
+#edit-submit,
+.form-actions input {
+  .background-gradient-vertical(#333, #000);
+  display: inline-block;
+  .border-radius(15px);
+  padding: 5px 17px;
+  border: 0;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    color: #666;
+    .background-gradient-vertical(#000, #222);
+  }
+}
+
+/* Contact form */
+
+.contact-form {
+  #edit-to {
+    display: none;
+  }
+  .form-type-emailfield input,
+  .form-type-textfield input {
+    width: 300px;
+  }
+}
