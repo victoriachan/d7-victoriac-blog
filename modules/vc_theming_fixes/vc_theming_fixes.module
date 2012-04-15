@@ -1,0 +1,9 @@
+<?php
+/**
+ * @file vc_theming_fixes.module
+ * Random hooks etc for theming
+ */
+
+function vc_theming_fixes_form_search_block_form_alter(&$form, &$form_state) {
+  $form['actions']['submit']['#value'] = t('Go');
+}

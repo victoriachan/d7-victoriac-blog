@@ -1,0 +1,7 @@
+; $Id$
+; Info file for vc_theming_fixes module
+name = VC custom theming fixes
+description = Miscellaneous hooks for theming
+package = Other
+core = 7.x
+version = "7.x-1.0"
