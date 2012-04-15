@@ -10,10 +10,33 @@
 @grid-padding: 10px;
 @grid-without-padding: 60px;
 
-@width-full: @grid-width * 12;
-@width-sidebar: @grid-width * 4;
-@width-main: @grid-width * 8;
+/* large 960px */
+@large-width-full: @grid-width * 12;
+@large-width-sidebar: @grid-width * 4;
+@large-width-sidebar-inner: @large-width-sidebar - @grid-padding - @grid-padding;
+@large-width-main: @grid-width * 8;
+@large-width-main-inner: @large-width-main - @grid-padding - @grid-padding;
 
+/* medium 720px */
+@medium-width-full: @grid-width * 9;
+@medium-width-sidebar: @grid-width * 3;
+@medium-width-sidebar-inner: @medium-width-sidebar - @grid-padding - @grid-padding;
+@medium-width-main: @grid-width * 6;
+@medium-width-main-inner: @medium-width-main - @grid-padding - @grid-padding;
+
+/* small 480px */
+@small-width-full: @grid-width * 6;
+@small-width-sidebar: @small-width-full;
+@small-width-sidebar-inner: @small-width-full;
+@small-width-main: @small-width-full;
+@small-width-main-inner: @small-width-full;
+
+/* xsmall 320px */
+@xsmall-width-full: @grid-width * 4;
+@xsmall-width-sidebar: @xsmall-width-full;
+@xsmall-width-sidebar-inner: @xsmall-width-full;
+@xsmall-width-main: @xsmall-width-full;
+@xsmall-width-main-inner: @xsmall-width-full;
 
 /* ********************* */
 /* Colours                */
