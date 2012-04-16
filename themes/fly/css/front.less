@@ -4,9 +4,19 @@
  
 @import "mixins.less";
 
-.page-level-main {
-  background: url(../images/homepage_mast.jpg) no-repeat 50% 0;
-}
-.page-sidebar {
-  padding-top: 25px;
+body.front {
+  .page-level-header {
+    .site-name {
+      a {
+        background-position: -261px 0;
+      }
+    }
+  }
+
+  .page-level-main {
+    background: url(../images/homepage_mast.jpg) no-repeat 50% 0;
+  }
+  .page-sidebar {
+    padding-top: 25px;
+  }
 }
